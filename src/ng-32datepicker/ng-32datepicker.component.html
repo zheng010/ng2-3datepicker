@@ -146,7 +146,5 @@
             <span class="day-unit" *ngFor="let day of daysNextNext; let i = index;" [ngClass]="{ 'is-prev-month': !day.inThisMonth, 'is-today': day.isToday, 'is-selected': day.isSelected , 'is-vacation': day.isVacation }" (click)="setDate(i)">{{ day.day }}</span>
           </div>
         </div>
-      
       </div>
   </div>
-  
