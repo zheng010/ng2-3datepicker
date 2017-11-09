@@ -61,8 +61,10 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     private subscriptions: Subscription[] = [];
 
     @Output()
-    public fNextMonth
-    : EventEmitter<any> = new EventEmitter();
+    public fNextMonth : EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public fBackMonth : EventEmitter<any> = new EventEmitter();
 
     markdayList: {
       day: Date;
@@ -175,6 +177,10 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
         this.fNextMonth.emit(e);
       }));
 
+      this.subscriptions.push(this.d3datepickerService.fBackMonth$.subscribe((e: NodeEvent) => {
+        this.fBackMonth.emit(e);
+      }));
+
     }
   
     parsemarkDays(){
@@ -252,6 +258,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     }
   
     prevMonth(): void {
+      this.d3datepickerService.setBackMonth('hello world123');
+      
       this.date = subMonths(this.date, 1);
       this.init();
     }

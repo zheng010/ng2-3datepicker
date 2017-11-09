@@ -44,4 +44,7 @@ export class AppHomeComponent implements  OnInit {
 		console.log(event);
 	}
 	
+	public queryBeforeMonth(event:Event):void{
+		alert('back');
+	}
 }

@@ -8,7 +8,8 @@
     <div class="column is-6 is-offset-3">
       <div class="datepicker-container">
       </div>
-      <ng-32datepicker [(ngModel)]="date"  (fNextMonth)="abc($event)" [options]="options" [markDays]="markDays"></ng-32datepicker>
+      <ng-32datepicker [(ngModel)]="date"  (fNextMonth)="abc($event)" (fBackMonth)="queryBeforeMonth($event)" 
+      [options]="options" [markDays]="markDays"></ng-32datepicker>
     </div>
   </div>
 </div>
