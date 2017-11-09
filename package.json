@@ -1,7 +1,7 @@
 {
   "name": "ng2-32datepicker",
   "version": "2.1.2",
-  "main": "bundles/ng2-datepicker.umd.js",
+  "main": "bundles/ng2-32datepicker.umd.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jkuri/ng2-datepicker.git"

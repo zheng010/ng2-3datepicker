@@ -9,9 +9,9 @@ module.exports = {
   output: {
     path: path.join(root, 'bundles'),
     publicPath: '/',
-    filename: 'ng2-datepicker.umd.js',
+    filename: 'ng2-32datepicker.umd.js',
     libraryTarget: 'umd',
-    library: 'ng2-datepicker',
+    library: 'ng2-32datepicker',
     umdNamedDefine: true
   },
   module: {
