@@ -1,5 +1,5 @@
 import { Component ,OnInit } from '@angular/core';
-import { DatepickerOptions } from '../../ng-32datepicker';
+import { D3DatepickerOptions } from '../../ng-32datepicker';
 
 import * as defaultLocale from 'date-fns/locale/en/index';
 
@@ -17,7 +17,7 @@ export class AppHomeComponent implements  OnInit {
 	markDays = [];
 
 
-	options: DatepickerOptions = {
+	options: D3DatepickerOptions = {
 	  minYear: 1970,
 	  maxYear: 2030,
 	  displayFormat: 'YYYY-MM-DD',

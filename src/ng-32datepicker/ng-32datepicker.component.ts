@@ -30,7 +30,7 @@ import { NodeEvent } from './ng-32datepicker.events';
 
 var cnLocale = require('date-fns//locale/zh_cn/index.js');
 
-export interface DatepickerOptions {
+export interface D3DatepickerOptions {
     minYear?: number; // default: current year - 30
     maxYear?: number; // default: current year + 30
     displayFormat?: string; // default: 'MMM D[,] YYYY'
@@ -51,7 +51,7 @@ export interface DatepickerOptions {
       ]
 })
 export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, OnChanges {
-    @Input() options: DatepickerOptions;
+    @Input() options: D3DatepickerOptions;
     @Input() markDays: {
       dateStart: String; //YYYYMMDD
       dateEnd: String; //YYYYMMDD
