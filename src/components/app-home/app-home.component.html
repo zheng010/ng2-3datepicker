@@ -8,8 +8,17 @@
     <div class="column is-6 is-offset-3">
       <div class="datepicker-container">
       </div>
-      <ng-32datepicker [(ngModel)]="date"  (fNextMonth)="abc($event)" (fBackMonth)="queryBeforeMonth($event)" 
+      
+      <ng-32datepicker [(ngModel)]="date"  
+      (fNextMonth)="abc($event)" 
+      (fBackMonth)="queryBeforeMonth($event)" 
+      (fSelectedNode)="selecedNode($event)"
       [options]="options" [markDays]="markDays"></ng-32datepicker>
     </div>
+
+    <button (click)="aaa()">aaaa</button>
+    <button (click)="bbb()">bbb</button>
+    <button (click)="ccc()">ccc</button>
+    
   </div>
 </div>

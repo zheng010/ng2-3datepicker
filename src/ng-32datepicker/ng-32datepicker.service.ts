@@ -9,7 +9,7 @@ export class D3datepickerService {
 
     public fNextMonth$: Subject<NodeEvent> = new Subject<NodeEvent>();
     public fBackMonth$: Subject<NodeEvent> = new Subject<NodeEvent>();
-    
+    public fSelectedNode$:Subject<NodeEvent> = new Subject<NodeEvent>();
 
     setNextMonth(message: string) {
         this.fNextMonth$.next({ text: message });
@@ -17,5 +17,9 @@ export class D3datepickerService {
 
     setBackMonth(message: string) {
         this.fBackMonth$.next({ text: message });
+    }
+
+    setSelectedNode(node: any){
+        this.fSelectedNode$.next(node);
     }
 }

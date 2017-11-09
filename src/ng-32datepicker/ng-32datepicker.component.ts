@@ -66,6 +66,9 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     @Output()
     public fBackMonth : EventEmitter<any> = new EventEmitter();
 
+    @Output()
+    public fSelectedNode : EventEmitter<any> = new EventEmitter();
+
     markdayList: {
       day: Date;
       dateStart: String; //YYYYMMDD
@@ -95,7 +98,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     dayNames: string[];
     scrollOptions: ISlimScrollOptions;
 
-    days: {
+     days :{
       date: Date;
       day: number;
       month: number;
@@ -104,7 +107,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
       isToday: boolean;
       isSelected: boolean;
       isVacation: boolean;
-    }[];
+    }[] ;
 
     daysNext: {
         date: Date;
@@ -135,13 +138,11 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     private onChangeCallback: (_: any) => void = () => { };
   
     get value(): Date {
-      console.log('----------get value-------');
       
       return this.innerValue;
     }
   
     set value(val: Date) {
-      console.log('----------set value-------');
       
       this.innerValue = val;
       this.onChangeCallback(this.innerValue);
@@ -167,9 +168,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
       this.setOptions();
       this.initDayNames();
       this.initYears();
-      console.log('console markday');
       
-      console.log(this.markDays);
       this.parsemarkDays();
 
 
@@ -181,6 +180,11 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
         this.fBackMonth.emit(e);
       }));
 
+      this.subscriptions.push(this.d3datepickerService.fSelectedNode$.subscribe((e: NodeEvent) => {
+        this.fSelectedNode.emit(e);
+      }));
+
+      
     }
   
     parsemarkDays(){
@@ -188,19 +192,10 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
 
       this.markDays.forEach(element => {
 
-        // 
-        // const tmpdays = [];
-
-        console.log(element);
-        
          let start = new Date(Number(element.dateStart.substring(0,4)),Number(element.dateStart.substring(4,6)) - 1 ,Number(element.dateStart.substring(6,8) ) );
          let end = new Date(Number(element.dateEnd.substring(0,4)),Number(element.dateEnd.substring(4,6)) -1 ,Number(element.dateEnd.substring(6,8)));
 
-        console.log(start);
-        console.log(end);
-        
         const tmpdays = eachDay(start, end).map(date => {
-          console.log('---->' + date);
           return {
             day: date,
             dateStart: element.dateStart,
@@ -217,16 +212,9 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
         }
       });
 
-      console.log(this.markdayList);
     }
 
     ngOnChanges(changes: SimpleChanges) {
-
-         
-      console.log('changes------------');
-
-      console.log(changes);
-    
 
       if ('options' in changes) {
         this.setOptions();
@@ -249,27 +237,38 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
   
     nextMonth(): void {
     
-      // 调用service 方法
-      this.d3datepickerService.setNextMonth('hello world123');
+      this.d3datepickerService.setNextMonth('1');
 
-      // this.nodeNextMonth.emit('complete');
       this.date = addMonths(this.date, 1);
       this.init();
     }
   
     prevMonth(): void {
-      this.d3datepickerService.setBackMonth('hello world123');
+      this.d3datepickerService.setBackMonth('1');
       
       this.date = subMonths(this.date, 1);
       this.init();
     }
   
-    setDate(i: number): void {
-        alert(i);
-    //   this.date = this.days[i].date;
-    //   this.value = this.date;
-    //   this.init();
-    //   this.close();
+    setDate(seletedDay:any): void {
+       
+        //clear all selected node
+        this.days.forEach(element => {
+          element.isSelected = false;
+        });
+
+        this.daysNext.forEach(element => {
+          element.isSelected = false;
+        });
+
+        this.daysNextNext.forEach(element => {
+          element.isSelected = false;          
+        });
+
+        seletedDay.isSelected = true;
+        this.value = this.date;
+                
+        this.d3datepickerService.setSelectedNode(seletedDay);
     }
   
     setYear(i: number): void {
@@ -288,12 +287,24 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
         return ret;
     }
 
+    setVacation(curday:Date,refdays:any[]):any {
+      
+              let ret : {} ;
+              refdays.forEach(element => {
+                 if( isSameDay(curday,element.day) ) ret = element;
+              });
+              return ret;
+    }
+
+
     init(): void {
+      this.parsemarkDays();
+
       const start = startOfMonth(this.date);
       const end = endOfMonth(this.date);
-      console.log('start =' + start);
       
       this.days = eachDay(start, end).map(date => {
+        let _isVacation = this.isVacation(date,this.markdayList);
         return {
           date: date,
           day: getDate(date),
@@ -302,13 +313,13 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
           inThisMonth: true,
           isToday: isToday(date),
           isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
-          isVacation: this.isVacation(date,this.markdayList),
+          isVacation: _isVacation,
+          source: this.setVacation(date,this.markdayList) ,
         };
       });
   
       for (let i = 1; i <= getDay(start) - this.firstCalendarDay; i++) {
         const date = subDays(start, i);
-        console.log('i=' + i + ',getdate =' + getDate(date));
         
         this.days.unshift({
           date: date,
@@ -320,12 +331,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
           isVacation: this.isVacation(date,this.markdayList),
           isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
         });
-        console.log(this.days);        
       }
-      console.log('11111 月' + getDay(start) );
-      
-      console.log(this.days);
-      
+    
       this.displayValue = format(this.innerValue, this.displayFormat, {locale: this.locale});
       this.barTitle = format(start, this.barTitleFormat, {locale: this.locale});
 
@@ -335,12 +342,9 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
   
 
     initNext(): void {
-        console.log(">>>initNext");
         
         this.dateNext = addMonths(this.date, 1);
-        console.log(this.date);
-        console.log(this.dateNext);
-        
+       
         const start = startOfMonth(this.dateNext);
         const end = endOfMonth(this.dateNext);
         
@@ -354,7 +358,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isToday: isToday(date),
             // isVacation: true,
             isVacation: this.isVacation(date,this.markdayList),            
-            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
+            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
+            source: this.setVacation(date,this.markdayList) ,            
           };
         });
     
@@ -377,7 +382,6 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
       }
 
       initNextNext(): void {
-          console.log(">>>initNextNext()");
           
         this.dateNextNext = addMonths(this.date, 2);
 
@@ -394,7 +398,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isToday: isToday(date),
             // isVacation: true,
             isVacation: this.isVacation(date,this.markdayList),            
-            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
+            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
+            source: this.setVacation(date,this.markdayList) ,                        
           };
         });
     
@@ -411,9 +416,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
           });
         }
-    
-        console.log(this.daysNextNext);
-        
+            
         this.displayValue = format(this.innerValue, this.displayFormat, {locale: this.locale});
         this.barTitleNextNext = format(start, this.barTitleFormat, {locale: this.locale});
       }
