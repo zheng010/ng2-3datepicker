@@ -193,8 +193,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     }
   
     parsemarkDays(){
-      //put into a list
-      console.log(this.markDays);
+      // console.log(this.markDays);
       
       this.markDays.forEach(element => {
 
