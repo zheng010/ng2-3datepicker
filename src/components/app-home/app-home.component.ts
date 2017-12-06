@@ -31,7 +31,7 @@ export class AppHomeComponent implements  OnInit {
 	}
 	
 	ngOnInit() {
-		this.markDays = [{dateStart:'20171101',dateEnd:'20171103',type:'1'},{dateStart:'20171205',dateEnd:'20171207',type:'1'}]
+		this.markDays = [{dateStart:'20301101',dateEnd:'20301101',type:'1'},{dateStart:'20301201',dateEnd:'20301201',type:'1'}]
 	}
 
 	onChangeCallback()
@@ -52,7 +52,7 @@ export class AppHomeComponent implements  OnInit {
 		console.log(event);
 	}
 	aaa():void{
-		this.markDays = [{dateStart:'20170503',dateEnd:'20170505',type:'1'},{dateStart:'20170605',dateEnd:'20170609',type:{vid:123,start:'20170605',end:'20170608',vtype:'2',vtypename:'hello'}}]		
+		this.markDays = [{dateStart:'20170503',dateEnd:'20170505',type:'2'},{dateStart:'20170605',dateEnd:'20170609',type:{vid:123,start:'20170605',end:'20170608',vtype:'2',vtypename:'hello'}}]		
 			this.date = new Date(2017,4,1);
 	}
 	bbb():void{
