@@ -56,6 +56,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
       dateStart: String; //YYYYMMDD
       dateEnd: String; //YYYYMMDD
       type: String;
+      showtype:String;
     }[];
   
     private subscriptions: Subscription[] = [];
@@ -74,6 +75,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
       dateStart: String; //YYYYMMDD
       dateEnd: String; //YYYYMMDD
       type: String;
+      showtype:String;
     }[];
 
     isOpened: boolean;
@@ -205,6 +207,7 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             dateStart: element.dateStart,
             dateEnd: element.dateEnd,
             type:element.type,
+            showtype:element.showtype,
           };
         });
 
@@ -287,8 +290,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
         let ret = false;
         console.log(refdays);
         
-        refdays.forEach(element => {    
-           if( isSameDay(curday,element.day) && element.type === vtype ) 
+        refdays.forEach(element => {
+           if( isSameDay(curday,element.day) && element.showtype === vtype ) 
            {
              ret = true;
            }

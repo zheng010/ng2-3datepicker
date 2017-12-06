@@ -52,11 +52,11 @@ export class AppHomeComponent implements  OnInit {
 		console.log(event);
 	}
 	aaa():void{
-		this.markDays = [{dateStart:'20170503',dateEnd:'20170505',type:'2'},{dateStart:'20170605',dateEnd:'20170609',type:{vid:123,start:'20170605',end:'20170608',vtype:'2',vtypename:'hello'}}]		
+		this.markDays = [{dateStart:'20170503',dateEnd:'20170505',showtype:'2',type:'3'},{dateStart:'20170605',dateEnd:'20170609',showtype:'1',type:{vid:123,start:'20170605',end:'20170608',vtype:'2',vtypename:'hello'}}]		
 			this.date = new Date(2017,4,1);
 	}
 	bbb():void{
-		this.markDays = [{dateStart:'20170703',dateEnd:'20170705',type:'1'},{dateStart:'20170805',dateEnd:'20170809',type:'1'}]		
+		this.markDays = [{dateStart:'20170703',dateEnd:'20170705',showtype:'1',type:'4'},{dateStart:'20170805',dateEnd:'20170809',type:'1'}]		
 		
 		this.date = new Date(2017,6,1);
 		
