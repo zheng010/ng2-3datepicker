@@ -288,7 +288,6 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
     isVacation(curday:Date,refdays:any[],vtype:string):boolean {
 
         let ret = false;
-        console.log(refdays);
         
         refdays.forEach(element => {
            if( isSameDay(curday,element.day) && element.showtype === vtype ) 
