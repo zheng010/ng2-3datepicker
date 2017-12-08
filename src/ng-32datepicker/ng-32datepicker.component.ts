@@ -322,7 +322,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
           year: getYear(date),
           inThisMonth: true,
           isToday: isToday(date),
-          isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
+          isSelected:false,          
+          // isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
           isVacation: this.isVacation(date,this.markdayList,'1'),
           isVacationb: this.isVacation(date,this.markdayList,'2'),
           source: this.setVacation(date,this.markdayList) ,
@@ -341,7 +342,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
           isToday: isToday(date),
           isVacation: this.isVacation(date,this.markdayList,'1'),
           isVacationb: this.isVacation(date,this.markdayList,'2'),
-          isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
+          isSelected:false,
+          // isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
         });
       }
     
@@ -370,8 +372,9 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isToday: isToday(date),
             // isVacation: true,
             isVacation: this.isVacation(date,this.markdayList,'1'),    
-            isVacationb: this.isVacation(date,this.markdayList,'2'),        
-            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
+            isVacationb: this.isVacation(date,this.markdayList,'2'),   
+            isSelected:false,            
+            //isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
             source: this.setVacation(date,this.markdayList) ,            
           };
         });
@@ -387,7 +390,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isToday: isToday(date),
             isVacation: this.isVacation(date,this.markdayList,'1'),
             isVacationb: this.isVacation(date,this.markdayList,'2'),
-            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
+            isSelected:false,            
+            // isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
           });
         }
     
@@ -412,8 +416,9 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isToday: isToday(date),
             // isVacation: true,
             isVacation: this.isVacation(date,this.markdayList,'1'),
-            isVacationb: this.isVacation(date,this.markdayList,'2'),         
-            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
+            isVacationb: this.isVacation(date,this.markdayList,'2'), 
+            isSelected:false,            
+            // isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue),
             source: this.setVacation(date,this.markdayList) ,                        
           };
         });
@@ -429,7 +434,8 @@ export class Ng_32datepickerComponent implements ControlValueAccessor, OnInit, O
             isToday: isToday(date),
             isVacation: this.isVacation(date,this.markdayList,'1'),
             isVacationb: this.isVacation(date,this.markdayList,'2'),
-            isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
+            isSelected:false,            
+            // isSelected: isSameDay(date, this.innerValue) && isSameMonth(date, this.innerValue) && isSameYear(date, this.innerValue)
           });
         }
             
