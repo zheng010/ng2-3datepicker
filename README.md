@@ -1,7 +1,7 @@
 # ng2-datepicker
 
 Angular 2+ Simple and minimal datepicker component
-
+https://github.com/zhengmh010/ng2-3datepicker/upload/sum.png
 [![AbstruseCI](https://abstruse.bleenco.io/badge/6)](https://abstruse.bleenco.io/repo/6)
 
 <p align="center">
