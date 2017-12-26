@@ -2,11 +2,8 @@
 
 Angular 2+ Simple and minimal datepicker component
 
-![Minion](http://octodex.github.com/images/minion.png)
+![Minion](https://github.com/zhengmh010/ng2-3datepicker/edit/master/sum.png)
 
-[link](http://example.com "Title")
-
-[![AbstruseCI](https://abstruse.bleenco.io/badge/6)](https://abstruse.bleenco.io/repo/6)
 
 <p align="center">
 </p>
